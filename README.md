@@ -2,7 +2,7 @@
 
 Welcome to the **Cricket Live Stream Web Application**! 🎉 This project is a web-based platform where users can watch live cricket matches and chat with others in real time. The application supports responsive design, Picture-in-Picture (PiP) mode, and fullscreen video playback.
 
-![Cricket Live Stream Screenshot](https://github.com/user-attachments/assets/bde17b37-f665-4143-b793-a700c2308056)
+![Cricket Live Stream Screenshot](https://github.com/user-attachments/assets/69b87352-315a-451f-bf11-2f97f39f5117)
 
 ## ✨ Features
 
