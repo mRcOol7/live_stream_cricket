@@ -53,7 +53,7 @@
         /* Video Player Styling */
         .iframe-container {
             position: relative;
-            width: 70%; /* Width for video */
+            width: 100%; /* Full width for video */
             padding-bottom: 56.25%; /* 16:9 aspect ratio */
             border-radius: 10px;
             overflow: hidden;
@@ -72,6 +72,7 @@
             height: 100%;
             border: none;
             border-radius: 10px; /* Rounded corners for iframe */
+            mute: false; /* Ensure audio is enabled by default */
         }
 
         /* Pitcher Selector */
@@ -212,16 +213,29 @@
                 align-items: center;
             }
 
-            .iframe-container,
-            .chat-container {
+            .iframe-container {
                 width: 100%; /* Full width for mobile */
+                padding-bottom: 56.25%; /* Maintain aspect ratio */
+            }
+
+            .chat-container {
+                width: 100%; /* Full width for chat on mobile */
             }
 
             h1 {
                 font-size: 2.5em;
             }
         }
+
+        @media (min-width: 769px) {
+            .iframe-container {
+                width: 70%; /* Width for video on larger screens */
+            }
+        }
     </style>
+    <script async="async" data-cfasync="false" src="//pl24550679.cpmrevenuegate.com/06a35590fd2cc8b1a4d48fd8008e7a81/invoke.js"></script>
+    <div id="container-06a35590fd2cc8b1a4d48fd8008e7a81"></div>
+    <script type='text/javascript' src='//pl24550386.cpmrevenuegate.com/0b/98/de/0b98de9f7b3317ede00560745b2d5411.js'></script>
 </head>
 
 <body>
@@ -230,6 +244,7 @@
 
     <div class="container">
         <div class="pitcher-selector">
+            <button class="pitcher-button" onclick="switchPitcher('https://cdn.crichdplays.ru/embed2.php?id=willow&q=Willow Cricket')">Willow Cricket</button>
             <button class="pitcher-button" onclick="switchPitcher('https://cdn.crichdplays.ru/embed2.php?id=btespn&q=TNT Sports 4')">TNT Sports 4</button>
             <button class="pitcher-button" onclick="switchPitcher('https://cdn.crichdplays.ru/embed2.php?id=osncric&q=SuperSport Cricket')">SuperSport Cricket</button>
             <button class="pitcher-button" onclick="switchPitcher('https://cdn.crichdplays.ru/embed2.php?id=skysp2&q=Sky Sports Cricket')">Sky Sports Cricket</button>
@@ -238,9 +253,15 @@
             <!-- Video Player Section -->
             <div class="iframe-container" ondblclick="toggleFullScreen()">
                 <button class="fullscreen-btn" onclick="toggleFullScreen()">🔳</button>
-                <iframe id="videoPlayer" src="https://cdn.crichdplays.ru/embed2.php?id=willow&q=Willow Cricket" name="iframe_a" scrolling="no" allow="autoplay; picture-in-picture" allowfullscreen>
-                    Your browser does not support iframes.
-                </iframe>
+                <div class="video-player-container">
+                    <iframe id="videoPlayer" src="https://cdn.crichdplays.ru/embed2.php?id=willow&q=Willow Cricket" name="iframe_a" scrolling="no" allow="autoplay; picture-in-picture" allowfullscreen title="Willow Cricket Live Stream">
+                        Your browser does not support iframes. Please update your browser or use a different one.
+                    </iframe>
+                    <div class="stream-info">
+                        <p>Current Stream: Willow Cricket</p>
+                    </div>
+                </div>
+                <p class="iframe-description">Enjoy the live stream of Willow Cricket in full-screen mode for the best experience!</p>
             </div>
 
             <!-- Chat Section -->
@@ -254,73 +275,173 @@
         </div>
     </div>
 
+    <style>
+        .ad-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .ad-container iframe {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .ad-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <div class="ad-container">
+        <script type="text/javascript">
+            atOptions = {
+                'key': 'd3739832b003e1132fde0ab8ca7608d4',
+                'format': 'iframe',
+                'height': 60,
+                'width': 468,
+                'params': {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.topcreativeformat.com/d3739832b003e1132fde0ab8ca7608d4/invoke.js"></script>
+    </div>
+
     <script>
-        // Full-screen toggle functionality
+        // Full-screen toggle functionality with enhanced logging and error handling
         function toggleFullScreen() {
             const iframeContainer = document.querySelector('.iframe-container');
             if (!document.fullscreenElement) {
-                iframeContainer.requestFullscreen().catch(err => {
-                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                // Check if the device is mobile and set orientation to landscape
+                if (/Mobi|Android/i.test(navigator.userAgent)) {
+                    screen.orientation.lock('landscape').catch(err => {
+                        console.error(`Error locking orientation: ${err.message}`);
+                    });
+                }
+                iframeContainer.requestFullscreen().then(() => {
+                    console.log('Entered full-screen mode');
+                }).catch(err => {
+                    console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                    alert(`Failed to enter full-screen mode. Please try again.`);
                 });
             } else {
-                document.exitFullscreen();
+                document.exitFullscreen().then(() => {
+                    console.log('Exited full-screen mode');
+                }).catch(err => {
+                    console.error(`Error attempting to exit full-screen mode: ${err.message} (${err.name})`);
+                });
             }
         }
-
-        // Send message function
+        
+        // Send message function with character limit and feedback
         function sendMessage() {
             const chatInput = document.getElementById('chatInput');
             const chatMessages = document.getElementById('chatMessages');
+            const maxLength = 200; // Maximum message length
             if (chatInput.value.trim() !== '') {
+                if (chatInput.value.length > maxLength) {
+                    alert(`Message exceeds ${maxLength} characters. Please shorten your message.`);
+                    return;
+                }
                 const message = document.createElement('div');
-                message.classList.add('chat-message');
-                message.innerHTML = `${chatInput.value} <span class="timestamp">[${new Date().toLocaleTimeString()}]</span>`;
+                message.className = 'chat-message';
+                message.innerText = chatInput.value;
+                const timestamp = document.createElement('span');
+                timestamp.className = 'timestamp';
+                timestamp.innerText = new Date().toLocaleTimeString(); // Add timestamp
+                message.appendChild(timestamp);
                 chatMessages.appendChild(message);
-                chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the latest message
+                chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
                 chatInput.value = ''; // Clear input
             }
         }
 
-        // Check for Enter key to send message
+        // Check for Enter key with additional functionality
         function checkEnter(event) {
             if (event.key === 'Enter') {
                 sendMessage();
+                event.preventDefault(); // Prevent default form submission
             }
         }
 
-        // Switch pitcher function
+        // Switch video source with enhanced logging and error handling
         function switchPitcher(url) {
             const videoPlayer = document.getElementById('videoPlayer');
-            videoPlayer.src = url; // Change iframe source
+            if (videoPlayer) {
+                videoPlayer.src = url;
+                console.log(`Video source switched to: ${url}`); // Log the new video source
+                videoPlayer.play().catch(err => {
+                    console.error(`Error attempting to play video: ${err.message}`);
+                }); // Automatically play the new video
+            } else {
+                console.error('Video player not found'); // Error handling if video player is not found
+            }
         }
 
-        // Automatically enter PiP when the tab changes
-        document.addEventListener('visibilitychange', async () => {
-            const videoPlayer = document.getElementById('videoPlayer');
-            if (document.visibilityState === 'hidden') {
-                if (videoPlayer) {
-                    try {
-                        await videoPlayer.requestPictureInPicture();
-                    } catch (error) {
-                        console.error('Failed to enter Picture-in-Picture mode:', error);
-                    }
+        // Advertisement script with responsive design
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//www.topcreativeformat.com/d3739832b003e1132fde0ab8ca7608d4/invoke.js"; // Replace with your ad script URL
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'ad-script'));
+
+        // CSS for responsive advertisement container
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .ad-container {
+                width: 100%;
+                max-width: 600px; /* Adjust max-width as needed */
+                margin: 0 auto; /* Center the ad container */
+                padding: 10px;
+                box-sizing: border-box;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden; /* Prevent overflow */
+            }
+
+            .ad-container iframe {
+                width: 100%;
+                height: auto; /* Maintain aspect ratio */
+                border: none; /* Remove border */
+            }
+
+            @media (max-width: 768px) {
+                .ad-container {
+                    padding: 5px; /* Reduce padding on smaller screens */
                 }
             }
-        });
+        `;
+        document.head.appendChild(style);
 
-        // Ensure PiP when tab is minimized
-        window.addEventListener('blur', async () => {
-            const videoPlayer = document.getElementById('videoPlayer');
-            if (document.fullscreenElement) {
-                return; // Prevent entering PiP if in full-screen mode
-            }
-            try {
-                await videoPlayer.requestPictureInPicture();
-            } catch (error) {
-                console.error('Failed to enter Picture-in-Picture mode:', error);
-            }
-        });
     </script>
+    <style>
+        .ad-container {
+            width: 100%;
+            max-width: 600px; /* Adjust max-width as needed */
+            margin: 0 auto; /* Center the ad container */
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .ad-container iframe {
+            width: 100%;
+            height: auto; /* Maintain aspect ratio */
+            border: none; /* Remove border */
+        }
+
+        @media (max-width: 768px) {
+            .ad-container {
+                padding: 5px; /* Reduce padding on smaller screens */
+            }
+        }
+    </style>
+    <div class="ad-container">
+        <script type='text/javascript' src='//pl24550622.cpmrevenuegate.com/23/2b/72/232b72c8a696f0f2d21a9972d68c381b.js'></script>
+    </div>
 </body>
 
 </html>
