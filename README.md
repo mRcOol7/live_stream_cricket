@@ -17,7 +17,7 @@ Welcome to the **Cricket Live Stream Web Application**! 🎉 This project is a w
 
 <div align="center">
   
-**[🏏 Click here to view the Live Demo 🏏](cricketstream.vercel.app)**
+**[🏏 Click here to view the Live Demo 🏏](https://cricketstream.vercel.app/))**
 
 </div>
 ## 🛠️ Technologies Used
