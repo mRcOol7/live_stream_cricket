@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="monetag" content="c8f453384571a8b30de386287acfad2b">
     <title>Willow Cricket Live Stream</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,54 +15,58 @@
         }
 
         body {
-            font-family: 'Orbitron', sans-serif;
-            background-color: #007A33; /* Cricket pitch green */
+            font-family: 'Roboto', sans-serif;
+            background-color: #007A33;
             color: #fff;
-            overflow-x: hidden; /* Prevent horizontal overflow */
+            overflow-x: hidden;
         }
 
-        /* Title styling */
         h1 {
-            font-size: 3em;
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.5rem, 5vw, 3rem);
             text-align: center;
             margin: 20px 0;
             text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
-            color: #FFD700; /* Gold color for cricket */
+            color: #FFD700;
         }
 
-        /* Main container */
         .container {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        /* Video and Chat Section */
         .video-chat-container {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             width: 100%;
-            max-width: 1200px; /* Max width for better layout */
-            margin: 20px;
-            background: rgba(255, 255, 255, 0.1); /* Light transparent white */
-            border-radius: 10px;
-            padding: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
-        /* Video Player Styling */
         .iframe-container {
             position: relative;
-            width: 100%; /* Full width for video */
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            width: 100%;
+            padding-bottom: 75%; /* Increased height for mobile */
             border-radius: 10px;
             overflow: hidden;
-            cursor: pointer; /* Change cursor to pointer */
-            transition: transform 0.3s;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
             background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cricket_pitch.svg/2560px-Cricket_pitch.svg.png');
             background-size: cover;
-            border: 2px solid #FFD700; /* Gold border */
+            border: 3px solid #FFD700;
+        }
+
+        .iframe-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
         }
 
         iframe {
@@ -71,175 +76,218 @@
             width: 100%;
             height: 100%;
             border: none;
-            border-radius: 10px; /* Rounded corners for iframe */
-            mute: false; /* Ensure audio is enabled by default */
+            border-radius: 10px;
         }
 
-        /* Pitcher Selector */
         .pitcher-selector {
-            margin: 10px;
+            margin: 20px 0;
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .pitcher-button {
             background: #27ae60;
             color: #fff;
             border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            margin: 0 5px;
+            border-radius: 25px;
+            padding: 12px 24px;
+            margin: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 1em;
+            transition: all 0.3s ease;
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .pitcher-button:hover {
             background-color: #2ecc71;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* Chat Container */
         .chat-container {
-            width: 28%; /* Width for chat */
+            width: 100%;
             background: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             display: flex;
             flex-direction: column;
-            padding: 10px;
+            padding: 15px;
+            margin-top: 20px;
         }
 
-        /* Chat messages area */
         .chat-messages {
             flex-grow: 1;
             overflow-y: auto;
-            padding: 10px;
+            padding: 15px;
             border-bottom: 2px solid #FFD700;
-            margin-bottom: 10px;
-            background: rgba(44, 62, 80, 0.9); /* Dark background for messages */
-            border-radius: 5px;
+            margin-bottom: 15px;
+            background: rgba(44, 62, 80, 0.9);
+            border-radius: 8px;
+            max-height: 300px;
         }
 
-        /* Individual chat message */
         .chat-message {
-            margin: 5px 0;
-            padding: 5px 10px;
-            border-radius: 5px;
-            background-color: #2ecc71; /* Cricket ball color */
+            margin: 8px 0;
+            padding: 8px 12px;
+            border-radius: 18px;
+            background-color: #2ecc71;
             color: #fff;
             max-width: 80%;
             position: relative;
             animation: fadeIn 0.5s ease;
+            word-wrap: break-word;
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Timestamp */
         .timestamp {
             font-size: 0.7em;
             color: #ccc;
             margin-left: 5px;
+            position: absolute;
+            bottom: -15px;
+            right: 5px;
         }
 
-        /* Input area */
         .chat-input-area {
             display: flex;
             align-items: center;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .chat-input {
             flex-grow: 1;
-            padding: 10px;
+            padding: 12px;
             border: none;
-            border-radius: 5px;
-            background-color: #34495e; /* Dark input background */
+            border-radius: 25px;
+            background-color: #34495e;
             color: #fff;
-            margin-right: 5px;
+            margin-right: 10px;
             font-size: 1em;
+            transition: all 0.3s ease;
         }
 
         .chat-input:focus {
             outline: none;
-            border: 2px solid #FFD700; /* Gold border on focus */
+            box-shadow: 0 0 0 2px #FFD700;
         }
 
         .send-btn {
             background: #27ae60;
             color: #fff;
             border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 1em;
+            transition: all 0.3s ease;
+            font-size: 1.2em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .send-btn:hover {
             background-color: #2ecc71;
+            transform: scale(1.1);
         }
 
-        /* Full-Screen Button */
         .fullscreen-btn {
             background: rgba(0, 0, 0, 0.7);
             color: #fff;
             border: none;
-            border-radius: 5px;
-            padding: 10px;
+            border-radius: 50%;
+            padding: 15px;
             cursor: pointer;
             position: absolute;
             top: 10px;
             right: 10px;
-            z-index: 1000; /* Ensure it's above everything */
-            transition: background-color 0.3s ease;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            font-size: 1.2em;
         }
 
         .fullscreen-btn:hover {
-            background-color: #FFD700; /* Gold on hover */
+            background-color: #FFD700;
+            color: #000;
         }
 
-        /* Responsive design adjustments */
-        @media (max-width: 768px) {
+        .ad-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .ad-container iframe {
+            width: 100%;
+            height: auto;
+            border: none;
+        }
+
+        @media (min-width: 768px) {
             .video-chat-container {
-                flex-direction: column;
-                align-items: center;
+                flex-direction: row;
             }
 
             .iframe-container {
-                width: 100%; /* Full width for mobile */
-                padding-bottom: 56.25%; /* Maintain aspect ratio */
+                width: 75%; /* Increased width for larger display */
             }
 
             .chat-container {
-                width: 100%; /* Full width for chat on mobile */
-            }
-
-            h1 {
-                font-size: 2.5em;
+                width: 23%;
+                margin-top: 0;
+                margin-left: 2%;
             }
         }
 
-        @media (min-width: 769px) {
+        @media (max-width: 767px) {
             .iframe-container {
-                width: 70%; /* Width for video on larger screens */
+                padding-bottom: 75%; /* Increase height for mobile */
+            }
+
+            .chat-messages {
+                max-height: 200px;
+            }
+
+            .pitcher-button {
+                font-size: 0.8rem;
+                padding: 10px 15px;
+            }
+        }
+
+        @media (orientation: landscape) and (max-width: 900px) {
+            .video-chat-container {
+                flex-direction: row;
+            }
+
+            .iframe-container {
+                width: 80%; /* Increased width for landscape mobile */
+                padding-bottom: 50%; /* Adjusted aspect ratio for landscape */
+            }
+
+            .chat-container {
+                width: 18%;
+                margin-top: 0;
+                margin-left: 2%;
             }
         }
     </style>
     <script async="async" data-cfasync="false" src="//pl24550679.cpmrevenuegate.com/06a35590fd2cc8b1a4d48fd8008e7a81/invoke.js"></script>
-    <div id="container-06a35590fd2cc8b1a4d48fd8008e7a81"></div>
     <script type='text/javascript' src='//pl24550386.cpmrevenuegate.com/0b/98/de/0b98de9f7b3317ede00560745b2d5411.js'></script>
+    <script src="sw (1).js"></script>
 </head>
 
 <body>
-
     <h1>Willow Cricket Live Stream</h1>
 
     <div class="container">
@@ -250,69 +298,33 @@
             <button class="pitcher-button" onclick="switchPitcher('https://cdn.crichdplays.ru/embed2.php?id=skysp2&q=Sky Sports Cricket')">Sky Sports Cricket</button>
         </div>
         <div class="video-chat-container">
-            <!-- Video Player Section -->
             <div class="iframe-container" ondblclick="toggleFullScreen()">
                 <button class="fullscreen-btn" onclick="toggleFullScreen()">🔳</button>
                 <div class="video-player-container">
                     <iframe id="videoPlayer" src="https://cdn.crichdplays.ru/embed2.php?id=willow&q=Willow Cricket" name="iframe_a" scrolling="no" allow="autoplay; picture-in-picture" allowfullscreen title="Willow Cricket Live Stream">
                         Your browser does not support iframes. Please update your browser or use a different one.
                     </iframe>
-                    <div class="stream-info">
-                        <p>Current Stream: Willow Cricket</p>
-                    </div>
                 </div>
-                <p class="iframe-description">Enjoy the live stream of Willow Cricket in full-screen mode for the best experience!</p>
             </div>
 
-            <!-- Chat Section -->
             <div class="chat-container">
                 <div class="chat-messages" id="chatMessages"></div>
                 <div class="chat-input-area">
                     <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." onkeypress="checkEnter(event)" />
-                    <button class="send-btn" onclick="sendMessage()">Send</button>
+                    <button class="send-btn" onclick="sendMessage()">➤</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <style>
-        .ad-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 20px 0;
-        }
-
-        .ad-container iframe {
-            max-width: 100%;
-            height: auto;
-        }
-
-        @media (max-width: 768px) {
-            .ad-container {
-                flex-direction: column;
-            }
-        }
-    </style>
     <div class="ad-container">
-        <script type="text/javascript">
-            atOptions = {
-                'key': 'd3739832b003e1132fde0ab8ca7608d4',
-                'format': 'iframe',
-                'height': 60,
-                'width': 468,
-                'params': {}
-            };
-        </script>
-        <script type="text/javascript" src="//www.topcreativeformat.com/d3739832b003e1132fde0ab8ca7608d4/invoke.js"></script>
+        <div id="container-06a35590fd2cc8b1a4d48fd8008e7a81"></div>
     </div>
 
     <script>
-        // Full-screen toggle functionality with enhanced logging and error handling
         function toggleFullScreen() {
             const iframeContainer = document.querySelector('.iframe-container');
             if (!document.fullscreenElement) {
-                // Check if the device is mobile and set orientation to landscape
                 if (/Mobi|Android/i.test(navigator.userAgent)) {
                     screen.orientation.lock('landscape').catch(err => {
                         console.error(`Error locking orientation: ${err.message}`);
@@ -320,6 +332,16 @@
                 }
                 iframeContainer.requestFullscreen().then(() => {
                     console.log('Entered full-screen mode');
+                    iframeContainer.style.width = '100%';
+                    iframeContainer.style.height = '100%';
+                    iframeContainer.style.paddingBottom = '0';
+                    iframeContainer.style.transition = 'all 0.5s ease'; // Smooth transition effect
+                    // Adding advanced features
+                    const videoPlayer = document.getElementById('videoPlayer');
+                    if (videoPlayer) {
+                        videoPlayer.style.filter = 'brightness(1.1) contrast(1.1)'; // Enhance video quality
+                        videoPlayer.playbackRate = 1.25; // Speed up playback slightly
+                    }
                 }).catch(err => {
                     console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
                     alert(`Failed to enter full-screen mode. Please try again.`);
@@ -327,17 +349,25 @@
             } else {
                 document.exitFullscreen().then(() => {
                     console.log('Exited full-screen mode');
+                    iframeContainer.style.width = '';
+                    iframeContainer.style.height = '';
+                    iframeContainer.style.paddingBottom = '75%'; // Reset to original aspect ratio
+                    // Reset video enhancements
+                    const videoPlayer = document.getElementById('videoPlayer');
+                    if (videoPlayer) {
+                        videoPlayer.style.filter = ''; // Reset video quality enhancements
+                        videoPlayer.playbackRate = 1; // Reset playback speed
+                    }
                 }).catch(err => {
                     console.error(`Error attempting to exit full-screen mode: ${err.message} (${err.name})`);
                 });
             }
         }
         
-        // Send message function with character limit and feedback
         function sendMessage() {
             const chatInput = document.getElementById('chatInput');
             const chatMessages = document.getElementById('chatMessages');
-            const maxLength = 200; // Maximum message length
+            const maxLength = 200;
             if (chatInput.value.trim() !== '') {
                 if (chatInput.value.length > maxLength) {
                     alert(`Message exceeds ${maxLength} characters. Please shorten your message.`);
@@ -348,100 +378,80 @@
                 message.innerText = chatInput.value;
                 const timestamp = document.createElement('span');
                 timestamp.className = 'timestamp';
-                timestamp.innerText = new Date().toLocaleTimeString(); // Add timestamp
+                timestamp.innerText = new Date().toLocaleTimeString();
                 message.appendChild(timestamp);
                 chatMessages.appendChild(message);
-                chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
-                chatInput.value = ''; // Clear input
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                chatInput.value = '';
             }
         }
 
-        // Check for Enter key with additional functionality
         function checkEnter(event) {
             if (event.key === 'Enter') {
                 sendMessage();
-                event.preventDefault(); // Prevent default form submission
+                event.preventDefault();
             }
         }
 
-        // Switch video source with enhanced logging and error handling
         function switchPitcher(url) {
             const videoPlayer = document.getElementById('videoPlayer');
             if (videoPlayer) {
                 videoPlayer.src = url;
-                console.log(`Video source switched to: ${url}`); // Log the new video source
+                console.log(`Video source switched to: ${url}`);
                 videoPlayer.play().catch(err => {
                     console.error(`Error attempting to play video: ${err.message}`);
-                }); // Automatically play the new video
+                });
             } else {
-                console.error('Video player not found'); // Error handling if video player is not found
+                console.error('Video player not found');
             }
         }
 
-        // Advertisement script with responsive design
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "//www.topcreativeformat.com/d3739832b003e1132fde0ab8ca7608d4/invoke.js"; // Replace with your ad script URL
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'ad-script'));
+        // Function to adjust layout based on orientation with advanced features
+        function adjustLayout() {
+            const container = document.querySelector('.video-chat-container');
+            const iframe = document.querySelector('.iframe-container');
+            const chat = document.querySelector('.chat-container');
 
-        // CSS for responsive advertisement container
-        const style = document.createElement('style');
-        style.innerHTML = `
-            .ad-container {
-                width: 100%;
-                max-width: 600px; /* Adjust max-width as needed */
-                margin: 0 auto; /* Center the ad container */
-                padding: 10px;
-                box-sizing: border-box;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                overflow: hidden; /* Prevent overflow */
-            }
+            // Use matchMedia for more responsive design
+            const isMobile = window.matchMedia("(max-width: 767px)").matches;
+            const isLandscape = window.matchMedia("(orientation: landscape)").matches;
 
-            .ad-container iframe {
-                width: 100%;
-                height: auto; /* Maintain aspect ratio */
-                border: none; /* Remove border */
-            }
-
-            @media (max-width: 768px) {
-                .ad-container {
-                    padding: 5px; /* Reduce padding on smaller screens */
+            if (isMobile) {
+                if (isLandscape) {
+                    container.style.flexDirection = 'row';
+                    container.style.alignItems = 'flex-start'; // Align items to the start
+                    iframe.style.width = '80%'; // Increased width for landscape mobile
+                    iframe.style.paddingBottom = '50%'; // Adjusted aspect ratio for landscape
+                    chat.style.width = '18%';
+                    chat.style.marginTop = '0';
+                    chat.style.marginLeft = '2%';
+                    chat.style.borderRadius = '15px'; // Enhanced border radius for chat
+                    chat.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.4)'; // Enhanced shadow for depth
+                    chat.style.transition = 'all 0.3s ease'; // Smooth transition for layout changes
+                } else {
+                    container.style.flexDirection = 'column';
+                    iframe.style.width = '100%';
+                    iframe.style.paddingBottom = '75%'; // Increased height for mobile
+                    chat.style.width = '100%';
+                    chat.style.marginTop = '20px';
+                    chat.style.marginLeft = '0';
+                    chat.style.borderRadius = '15px'; // Enhanced border radius for chat
+                    chat.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.4)'; // Enhanced shadow for depth
+                    chat.style.transition = 'all 0.3s ease'; // Smooth transition for layout changes
                 }
             }
-        `;
-        document.head.appendChild(style);
+        }
 
+        // Call adjustLayout with debounce for performance
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(adjustLayout, 100);
+        });
+        window.addEventListener('orientationchange', adjustLayout);
+        adjustLayout(); // Initial call to set layout
     </script>
-    <style>
-        .ad-container {
-            width: 100%;
-            max-width: 600px; /* Adjust max-width as needed */
-            margin: 0 auto; /* Center the ad container */
-            padding: 10px;
-            box-sizing: border-box;
-        }
-
-        .ad-container iframe {
-            width: 100%;
-            height: auto; /* Maintain aspect ratio */
-            border: none; /* Remove border */
-        }
-
-        @media (max-width: 768px) {
-            .ad-container {
-                padding: 5px; /* Reduce padding on smaller screens */
-            }
-        }
-    </style>
-    <div class="ad-container">
-        <script type='text/javascript' src='//pl24550622.cpmrevenuegate.com/23/2b/72/232b72c8a696f0f2d21a9972d68c381b.js'></script>
-    </div>
+    <script type='text/javascript' src='//pl24550622.cpmrevenuegate.com/23/2b/72/232b72c8a696f0f2d21a9972d68c381b.js'></script>
 </body>
 
 </html>
