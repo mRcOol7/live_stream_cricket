@@ -1,21 +1,24 @@
-# 🏏 **Cricket Live Stream Web Application**
+# 🏅 **Live Sports Stream Web Application**
 
-Welcome to the **Cricket Live Stream Web Application**! 🎉 This is an immersive platform where users can **watch live cricket matches** and chat in real-time with other fans. Featuring a sleek and responsive design, **Picture-in-Picture (PiP)** mode, and fullscreen video playback, this app guarantees an exceptional viewing experience for every cricket enthusiast. 
+Welcome to the **Live Sports Stream Web Application**! 🎉 This is an immersive platform where users can **watch live sports matches** and chat in real-time with other fans. Featuring a sleek and responsive design, **Picture-in-Picture (PiP)** mode, and fullscreen video playback, this app guarantees an exceptional viewing experience for every sports enthusiast. 
+
 
 ---
 
-![Cricket Live Stream Screenshot](https://github.com/user-attachments/assets/69b87352-315a-451f-bf11-2f97f39f5117)
+![Cricket Live Stream Screenshot](https://github.com/user-attachments/assets/965d1248-80ad-409a-80e7-0e193061c298)
+
 
 ---
 
 ## ✨ **Features**
 
-- 🎥 **Live Cricket Stream**: Watch live cricket matches through a seamlessly embedded video player powered by an iframe.
-- 🖼️ **Picture-in-Picture (PiP)**: Automatically enters PiP mode when you minimize the tab or switch to another window.
-- 📺 **Fullscreen Mode**: Double-click or press the fullscreen button to enjoy an immersive fullscreen experience.
-- 💬 **Real-time Chat**: Engage in live conversations alongside the stream with timestamped messages.
-- 🏏 **Cricket-Themed UI**: Enjoy a modern, cricket-inspired design with sleek animations and themed colors.
+- 🎥 **Live Sports Stream**: Watch live matches across various sports, including cricket, football, and more, through a seamlessly embedded video player powered by an iframe.
+- 🖼️ **Picture-in-Picture (PiP)**: Automatically enters PiP mode when you minimize the tab or switch to another window, allowing you to multitask effortlessly.
+- 📺 **Fullscreen Mode**: Double-click or press the fullscreen button to enjoy an immersive fullscreen experience with any live match.
+- 💬 **Real-time Chat**: Engage in live conversations alongside the stream with timestamped messages, connecting with other fans in real-time.
+- ⚽ **Sport-Themed UI**: Enjoy a modern, sports-inspired design with sleek animations and themed colors tailored for various sports.
 - 📱 **Mobile Responsive**: A fully responsive layout for smooth viewing across devices, from mobile to desktop.
+
 
 ---
 
@@ -34,7 +37,7 @@ Welcome to the **Cricket Live Stream Web Application**! 🎉 This is an immersiv
 - **HTML5**: Provides the structure for the web app.
 - **CSS3**: Enhances visual design with responsive styling and modern animations.
 - **JavaScript**: Powers interactivity like PiP mode, fullscreen functionality, and real-time chat.
-- **Fonts**: The `Orbitron` font from Google Fonts adds a unique, modern aesthetic.
+- **Fonts**: The `Roboto` font from Google Fonts adds a unique, modern aesthetic.
 - **iframe**: Embeds the secure video player for seamless streaming.
 
 ---
@@ -67,23 +70,24 @@ Follow these steps to run the project locally:
    - Then, open `localhost:8000` in your web browser.
 
 ---
-
 ## 🎮 **How to Use**
 
-### 🏏 **Watch Live Cricket**:
-- The default live stream will automatically load in the iframe when the page opens.
-- Switch between streams by clicking the buttons at the top of the page.
+### 🏅 **Watch Live Sports**:
+- The default live stream will automatically load in the iframe when the page opens, featuring matches from various sports.
+- Switch between streams by clicking the buttons at the top of the page to select your preferred sport.
 
 ### 💬 **Engage in the Chat**:
 - Type your message into the chat input and press Enter or click "Send" to post.
 - Messages appear with timestamps, and the chat auto-scrolls to keep the conversation current.
 
 ### 📺 **Enable Full-Screen Mode**:
-- Double-click the video player or press the fullscreen button to toggle full-screen mode.
+- Double-click the video player or press the fullscreen button to toggle full-screen mode for an immersive viewing experience.
 
 ### 🖼️ **Activate Picture-in-Picture**:
 - PiP mode activates automatically when you minimize or switch tabs.
 - You can also enable it manually by right-clicking the video (in supported browsers).
+
+Let me know if there are any other adjustments you’d like!
 
 ---
 
@@ -93,5 +97,5 @@ For your safety, the live stream is embedded using an iframe to ensure secure an
 
 ---
 
-Enjoy the thrill of live cricket! 🏏🔥
+Enjoy the thrill of live sports! 🏅🔥
 
